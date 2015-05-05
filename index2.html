@@ -5,7 +5,81 @@
 	</head>
 	<body>
 		<h1 style="color:red">我是页面2</h1>
-		<h2 ><a href="/index.html">去页面1</a></h2>
+		上面的url变了
+		<h2 ><a href="/route_test/index.html">去页面1</a></h2>
+		<h3><a href="#here">去一个特定的地方</a></h3>
+		<p>
+    <span>在日常的git操作中，git checkout——检出，是我们的常用命令。最为常用的两种情形是创建分支和切换分支。</span>
+  </p>
+  <p>
+    <strong>
+      <span style="color: #0000ff;">（一）基础——千里之行，始于切糕(checkout)</span>
+    </strong>
+  </p>
+  <p>先熟悉下常用操作，创建分支和切换分支，也可以称为检出分支。</p>
+  <p>首先我们新建一个仓库gitTest，然后新建文件a，为什么要用a命名呢，这里是故意为之，后面为大家揭晓分支。呵呵。或许下面的介绍会有些枯燥乏味，因为您已经对这些命令烂熟于胸，而且运用得相当熟练，那么您可以直接跳过这一步。</p>
+  <p>
+    <img src="http://img0.tuicool.com/MNZVRv.jpg" alt="" />
+  </p>
+  <p>在master分支上，做一次提交c1，然后现在新建一个分支a，并切换到a分支。</p>
+  <p>这个操作主要会用到两个命令：</p>
+  <p>创建新分支：git branch branchName</p>
+  <p>切换到新分支：git checkout branchName</p>
+  <p>
+    <img src="http://img0.tuicool.com/EJFnq2.jpg" alt="" />
+  </p>
+  <p>
+    <span>然后</span>
+    ，上面两个命令也可以合成为一个命令：
+  </p>
+  <p>git checkout -b branchName</p>
+  <p>
+    <img src="http://img0.tuicool.com/JBVrYf.jpg" alt="" />
+  </p>
+  <p>
+    <strong>
+      <span style="color: #0000ff;">（二）真相——HEAD是checkout的灵魂</span>
+    </strong>
+  </p>
+  <p>其实，我们在切换分支，和新建分支的时候，有没有想过，这些操作操作背后的工作原理是怎样的呢？最大的功臣就是.git目录下的HEAD引用，她宛如一个芭蕾舞者，从一个分支飘逸的跳到另一个分支，虽无声无息，却精准无比。</p>
+  <p>在我们身处master分支的时候，您一定很好奇，当前的HEAD的内容是什么？不妨来看看吧。</p>
+  <p>
+    <img src="http://img0.tuicool.com/FBbqQ3.jpg" alt="" />
+  </p>
+  <p>我们看到c1的提交hash值和HEAD对应分支master的当前hash值是一样的。也就是说，HEAD指向的是当前分支名master，而master又对应了当前的最新的一次提交ID.</p>
+  <p>好，那么我们再做一次提交，看看master对应的hash值有无变化。</p>
+  <p>
+    <img src="http://img1.tuicool.com/VBveUr.jpg" alt="" />
+  </p>
+  <p>
+    <span>从上图，我们可以不难看出，HEAD对应的ref没有变化，还是master，但是master对应的commit ID却变成了c2对应的commit ID，即更新为最后一次提交的ID咯。</span>
+  </p>
+  <p>
+    <span>
+      <span>现在，提交一次的原理，我们已然了解，那么切换分支的时候呢？？</span>
+    </span>
+  </p>
+  <p>
+    <span>现在我们身处master分支，然后我们切换到a分支，看看会发生什么样的情况吧。</span>
+  </p>
+  <p>
+    <span>
+      <img src="http://img1.tuicool.com/MZnEVb.jpg" alt="" />
+    </span>
+  </p>
+  <p>从上图分析，在master分支上的时候，HEAD指向的是master，对应的是c2的commit ID。而切换到a分支的时候，HEAD也相应的指向了a，同时a对应的是a分支上的最新commit ID。因此，我们可以得出结论，在切换分支的时候，HEAD也会相应的指向对应的分支引用。</p>
+  <p>但是，使用checkout命令的时候，并不是每次都会改变HEAD指针的指向哦。在什么情况下HEAD一直坚定不移的拥护者他的女神呢？可谓衣带渐宽终不悔，长使英雄泪满襟啊！让我们接着往下看。</p>
+  <p>
+    <span style="color: #0000ff;">
+      <strong>（三）进阶——HEAD懂不懂，看你怎么用</strong>
+    </span>
+  </p>
+  <p>checkout命令用法如下：</p>
+  <p>1. git checkout [-q] [&lt;commit&gt;] [--] &lt;paths&gt; ...</p>
+  <p>2. git checkout [&lt;branch&gt;]</p>
+  <p id="here">3. git checkout [-m] [ [-b | -- orphan ] &lt;new_branch&gt;] &nbsp;[start_point]&nbsp;</p>
+  <p>用法2比用法1的区别在于，用法1包含了路径。为了避免路径和引用（或提交ID）同名而发生冲突，可以在&lt;paths&gt;前用两个连续的连字符作为分隔。用法1的&lt;commit&gt;是可选项，如果省略，则相当于从暂存区进行检出。</p>
+  <p>来看个例子：</p>
 		<script type="text/javascript">
 		/*
 			var a = 1;
